@@ -1,0 +1,17 @@
+<!-- templates/join_class.html -->
+{% extends "base.html" %}
+
+{% block title %}Join Class{% endblock %}
+
+{% block content %}
+<h1>Join Class</h1>
+{% if class_code %}
+
+<p>Class code received: {{ class_code }}</p>
+
+{% else %}
+
+<p>No class code provided</p>
+
+{% endif %}
+{% endblock %}

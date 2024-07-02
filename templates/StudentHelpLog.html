@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block title %}Logs{% endblock %}
+
+{% block content %}
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Class: Class Code</th>
+                <th>details</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            {% for log in Logs %}
+            <tr>
+                <td>{{ log.datelogged }}</td>
+                <td>{{ log.user.user.username }}</td>
+                <td>{{ log.classes.ClassName }}: {{ log.classes.ClassCode }}</td>
+                <td>{{ log.reason }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

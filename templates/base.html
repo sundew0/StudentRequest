@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+</head>
+
+<body>
+  <main>
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}!</p>
+    <p><a href="{% url 'password_change' %}">Password Change</a></p>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+     <button type="submit">Log Out</button>
+    </form>
+    <a href="/">home</a>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+
+</html>

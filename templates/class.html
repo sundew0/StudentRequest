@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+
+{% block title %} {{ classinfo.ClassName }} {% endblock %}
+
+{% block content %}
+
+
+
+<h1>{{ classinfo.ClassName }}</h1>
+
+
+<!-- Display messages -->
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% if user|in_group:"teacher" %}
+<p>test</p>
+{% endif %}
+<!-- Buttons to add logs -->
+<div>
+    <button onclick="location.href='{% url 'addStudentLog' %}?reason=3CJ77&class={{ classinfo.id }}'">Hand up</button>
+    <button onclick="location.href='{% url 'addStudentLog' %}?reason=YP8NW&class={{ classinfo.id }}'">Water</button>
+    <button onclick="location.href='{% url 'addStudentLog' %}?reason=C91G9&class={{ classinfo.id }}'">Toilet</button>
+</div>
+{% endblock %}

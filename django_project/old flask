@@ -1,0 +1,49 @@
+@app.route('/help')
+def gethelp():
+    userid = session["userid"]
+    with open("database/users.json") as file:
+        data = json.load(file)
+        print(data)
+    for user in data:
+        print(userid)
+        if int(user["id"]) == int(userid):
+            username = user["name"]
+            userClass = user["classes"]
+            current_time = datetime.datetime.now()
+            newdata = dict(name = username, Userclass = userClass, time=str(current_time))
+
+            with open("database/helplog.json", "r") as helpfile:
+
+                data = json.load(helpfile)
+            with open("database/helplog.json", "w") as helpfile:
+                data.append(newdata)
+                json.dump(data, helpfile)
+                #olddata = json.load(helpfile)
+                #print (olddata)
+                #updateddata = olddata[0].append(data)
+                #print(updateddata)
+                #json.dump(updateddata, helpfile, indent=0)
+
+            return render_template('index.html', help=False, title=session["name"] , teacher=session["isTeacher"], userid=session["userid"])
+
+    return("no user")
+
+@app.route("/listhelp")
+def listhelp():
+    with open("database/helplog.json") as helplog:
+        data = json.load(helplog)
+    is_Admin = request.args.get('isAdmin', default=0)
+    listclass= request.args.get('listClass', default=0)
+    classid = request.args.get('classid', default=0)
+    if is_Admin:
+        return jsonify(data)
+    else:
+        log = {}
+        for item in data:
+            print(classid)
+            print(listclass)
+            if item.get("Userclass", {}).get(listclass) == classid:
+                item_name = item.get("name")
+                log[item_name] = item
+                print(item_name)
+        return jsonify(log)
