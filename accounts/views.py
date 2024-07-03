@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views import generic
+from django.shortcuts import render, redirect#type: ignore
+from django.urls import reverse_lazy#type: ignore
+from django.views import generic#type: ignore
 from .forms import CustomUserCreationForm, JoinClassForm
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required#type: ignore
+from django.http import HttpResponse#type: ignore
 from .models import Classes, ClassList, Account
 from StudentSupport.logger import log_action
-from StudentSupport.models import Log
-from django.template import loader
+from StudentSupport.models import Log#type: ignore
+from django.template import loader#type: ignore
+from django.contrib import messages #type: ignore
+
 
 
 #class SignUpView(CreateView):
@@ -50,20 +52,21 @@ def JoinClass(request):
                 NewClass.save()
                 log_action(user_instance, 'JOIN_CLASS_REQUEST',
                            f'Joined Class id: {class_instance.id}')
-                return redirect("home")
+                messages.error(request, f"Joined Class id: {class_instance.id}")
             else:
                 log_action(user_instance, 'JOIN_CLASS_REQUEST',
                            f'Failed to join Class id: {class_instance.id}, Already in class')
-                return HttpResponse("Already in class")
+                messages.error(request, "already in class.")
         except Classes.DoesNotExist:
             log_action(user_instance, 'JOIN_CLASS_REQUEST',
-                       f'Failled to join Class ID: {class_instance.id}, class does not exist')
-            return HttpResponse("Invalid class code")
+                       f'Failled to join Class ID: {class_code}, class does not exist')
+            messages.error(request, "Class doesnt exist.")
     else:
         log_action(user_instance, 'JOIN_CLASS_REQUEST', f'Failled to join Class, no class code provided')
-        return HttpResponse("No class code provided")
 
+        messages.error(request, "No Class code.")
 
+    return redirect(request.META.get('HTTP_REFERER', 'default-view-name'))
 @login_required(redirect_field_name='registration/login/')
 def Home(request):
     user = request.user

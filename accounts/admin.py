@@ -1,6 +1,6 @@
-from django.contrib import admin
-from django.contrib.auth.models import User
-from django.contrib.auth.admin import UserAdmin
+from django.contrib import admin#type: ignore
+from django.contrib.auth.models import User#type: ignore
+from django.contrib.auth.admin import UserAdmin#type: ignore
 # Register your models here.
 from .models import Classes, ClassList, Account
 

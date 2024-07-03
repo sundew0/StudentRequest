@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include #type: ignore
 
 from . import views as studentViews
 from . import logger as Logger
