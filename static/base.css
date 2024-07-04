@@ -1,0 +1,31 @@
+body{
+    background-color: rgb(39, 39, 39);
+
+}
+.title{
+    background-color: rgb(75, 75, 75);
+    color: rgb(236, 236, 236);
+    height: 100px;
+    font-size: 50px;
+}
+#navbar {
+    background-color: rgb(75, 75, 75);
+    color: rgb(236, 236, 236);
+    height: 100px;
+    font-size: 20px;
+    display: flex; 
+    justify-content: flex-end;
+}
+
+#navbar .heading{
+    justify-content: left;
+}
+* {
+    margin: 0;
+    text-align: center;
+}
+#content{
+    background-color: rgb(160, 160, 160);
+    width: 90vw;
+    margin: 0 5% 0 5%;
+}

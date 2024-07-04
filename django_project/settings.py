@@ -23,13 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ufn%=eh$a71hm&3f1q4=!wr()qn+l#bd4qrns!#q%)xso@14s='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    'localhost',
-    'localhost:8000']
-
-CSRF_TRUSTED_ORIGINS = ['https://localhost:8000']
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['http://*',
+                        'https://*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -119,7 +117,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / 'production'
+
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = ('static',)
+
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL ="home"
 

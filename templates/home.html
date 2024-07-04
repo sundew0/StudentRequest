@@ -1,15 +1,23 @@
 <!-- templates/home.html -->
-{% extends "base.html" %}
 
+{% extends "base.html" %}
+{% load static %}
 {% block title %}Home{% endblock %}
 
-{% block content %}
-<ul>
-  {% for class in class_list %}
-    <li><a href="/class/{{ class.ClassID.id }}">{{ class.ClassID.ClassName }}: {{ class.ClassID.ClassCode }}</a></li>
-  {% endfor %}
-</ul>
+{% block staticFiles %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
 
+{% block content %}
+
+<div id="ClassList">
+  <h1>Your Classes</h1>
+  <ul>
+    {% for class in class_list %}
+      <li><a href="/class/{{ class.ClassID.id }}">{{ class.ClassID.ClassName }}: {{ class.ClassID.ClassCode }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
     <h2>Join Class</h2>
     {% if messages %}
     <div>

@@ -87,3 +87,5 @@ def Home(request):
         'form': form
     }
     return render(request, 'home.html', context=context)
+def testing(request):
+    return render(request, 'test.html')

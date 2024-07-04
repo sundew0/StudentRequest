@@ -14,13 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.contrib import admin # type: ignore
+from django.urls import path, include # type: ignore
 
 from accounts import views as accountsViews
 from StudentSupport import views as studentViews
 from StudentSupport import logger as Logger
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required # type: ignore
 from accounts.classes import getClassinfo, getClass
 
 
@@ -33,6 +33,7 @@ urlpatterns = [
     path('addLog/', studentViews.addToLog, name='addStudentLog'),
     path('getLog/', Logger.getLog),
     path('fullStudentLog/', Logger.getFullStudentHelpLog),
-    path('class/<int:id>', getClass)
+    path('class/<int:id>', getClass),
+    path('test/', accountsViews.testing)
 
     ]
