@@ -69,8 +69,9 @@ def JoinClass(request):
     return redirect(request.META.get('HTTP_REFERER', 'default-view-name'))
 @login_required(redirect_field_name='registration/login/')
 def Home(request):
+    
     user = request.user
-
+    
     class_lists = ClassList.objects.filter(UserID__id=user.id)
 
 
@@ -83,6 +84,7 @@ def Home(request):
     else:
         form = JoinClassForm()
     context = {
+        'IsTeacher': user.account.IsTeacher, 
         'class_list': class_lists,
         'form': form
     }

@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views import generic
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.contrib import messages
+from django.shortcuts import render, redirect # type: ignore
+from django.urls import reverse_lazy # type: ignore
+from django.views import generic # type: ignore
+from django.contrib.auth.decorators import login_required # type: ignore
+from django.http import HttpResponse # type: ignore
+from django.contrib import messages # type: ignore
 
 from accounts.models import ClassList, Classes, Account
 from .models import StudentHelp
