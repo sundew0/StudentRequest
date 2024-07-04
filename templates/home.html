@@ -14,7 +14,13 @@
   <h1>Your Classes</h1>
   <ul>
     {% for class in class_list %}
-      <li><a href="/class/{{ class.ClassID.id }}">{{ class.ClassID.ClassName }}: {{ class.ClassID.ClassCode }}</a></li>
+       <div id="ClassItem">
+        <li>
+       
+          <a href="/class/{{ class.ClassID.id }}">{{ class.ClassID.ClassName }}: {{ class.ClassID.ClassCode }}</a>
+        
+        </li>
+      </div>
     {% endfor %}
   </ul>
 </div>

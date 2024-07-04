@@ -3,4 +3,23 @@
 }
 #ClassList li {
     list-style-type: none;
-}               
+    margin: 0;
+}           
+#ClassList ul {
+    padding: 0;
+}     
+#ClassItem{
+    height: 30px;
+}
+#ClassItem a{
+    
+    text-decoration: none;
+}
+#ClassItem:nth-child(even){
+    color: white;
+    background-color: rgb(75, 75, 75);
+}
+#ClassItem:nth-child(odd){
+    color: black;
+    background-color: rgb(241, 241, 241);
+}
