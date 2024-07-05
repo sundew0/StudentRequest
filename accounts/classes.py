@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test#type
 from django.shortcuts import render, redirect#type: ignore
 from StudentSupport.utils import is_on_group_check, getClassFromID, is_user_in_class#type: ignore
 from .forms import CreateNewClass
-from .models import Classes
+from .models import Classes, Account
 
 def getClassinfo(request, id):
     user = request.user
@@ -35,7 +35,7 @@ def getClass(request, id):
 
 def Create_New_Class(request):
     user = request.user
-
+    user_instance = Account.objects.get(user=user)
     if request.method == 'POST':
         form = CreateNewClass(request.POST)
         if form.is_valid():
@@ -43,9 +43,13 @@ def Create_New_Class(request):
             print(ClassName)
             ClassSubject = form.cleaned_data['Subject']
             print(ClassSubject)
+            
 
             if not Classes.objects.filter(ClassName=ClassName, Subject=ClassSubject).exists():
-                newClass = Classes(ClassName=ClassName, subject=ClassSubject)
+                newClass = Classes(ClassName=ClassName, Subject=ClassSubject)
+                newClass.save()
+                newClass.Teachers.add(user_instance.user)
+            print(Classes.objects.filter(ClassName=ClassName, Subject=ClassSubject))
                 
             return redirect('home')
     else:

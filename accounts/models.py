@@ -21,7 +21,7 @@ class Classes(models.Model):
     Teachers = models.ManyToManyField(User)
 
     def __str__(self):
-        return f"id: {self.id}, Class name: {self.ClassName},  Subject: {self.Subject}, Teachers: {self.Teachers}"
+        return f"id: {self.id}, Class name: {self.ClassName},  Subject: {self.Subject}, Teachers: {self.Teachers.all()}"
 
 
 class ClassList(models.Model):
