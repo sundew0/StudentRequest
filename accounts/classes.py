@@ -44,7 +44,7 @@ def Create_New_Class(request):
             print(ClassName)
             ClassSubject = form.cleaned_data['Subject']
             print(ClassSubject)
-            ClassCode = form.cleaned_data['Class Code']
+            ClassCode = form.cleaned_data['ClassCode']
             
 
             if not Classes.objects.filter(ClassName=ClassName, Subject=ClassSubject).exists():
