@@ -18,10 +18,10 @@ class Classes(models.Model):
     id = models.AutoField(primary_key=True)
     ClassCode = models.CharField(max_length=6, null=True, verbose_name="Class Code")
     ClassJoinCode = models.CharField(max_length=6, null=True, unique=True, verbose_name="join Code")
-
+    Teachers = models.ManyToManyField(User)
 
     def __str__(self):
-        return f"id: {self.id}, Class name: {self.ClassName},  Subject: {self.Subject}"
+        return f"id: {self.id}, Class name: {self.ClassName},  Subject: {self.Subject}, Teachers: {self.Teachers}"
 
 
 class ClassList(models.Model):

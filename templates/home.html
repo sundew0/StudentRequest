@@ -25,6 +25,11 @@
   </ul>
 </div>
     {% if IsTeacher %}
+      <div id="CreateClass">
+        <h1>Create Class</h1>
+        <a href="createClass">Create new class</a>
+      </div>
+    {% endif %}
     <h2>Join Class</h2>
     {% if messages %}
     <div>
@@ -40,4 +45,5 @@
         {{ form.as_p }}
         <button type="submit">Join Class</button>
     </form>
+    
 {% endblock %}

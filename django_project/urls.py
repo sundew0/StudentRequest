@@ -21,7 +21,7 @@ from accounts import views as accountsViews
 from StudentSupport import views as studentViews
 from StudentSupport import logger as Logger
 from django.contrib.auth.decorators import login_required # type: ignore
-from accounts.classes import getClassinfo, getClass
+from accounts.classes import getClassinfo, getClass, Create_New_Class
 
 
 urlpatterns = [
@@ -34,6 +34,6 @@ urlpatterns = [
     path('getLog/', Logger.getLog),
     path('fullStudentLog/', Logger.getFullStudentHelpLog),
     path('class/<int:id>', getClass),
-    path('test/', accountsViews.testing)
-
+    path('test/', accountsViews.testing),
+    path('createClass/', Create_New_Class)
     ]
