@@ -1,4 +1,4 @@
-from .models import Log, StudentHelpLog
+from .models import Log, StudentHelp
 from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
@@ -33,15 +33,12 @@ def getLog(request):
 def getFullStudentHelpLog(request):
     print('test')
     print(is_on_group_check('teacher'))
-    log_data = StudentHelpLog.objects.all()
+    log_data = StudentHelp.objects.all()
 
     return render(request, 'StudentHelpLog.html', {'Logs': log_data})
 
 @user_passes_test(is_on_group_check('teacher'))
 def getClassStudentHelpLog(request, classid):
-    print(getClassFromID(classid))
-    print(classid)
-    print(is_on_group_check('teacher'))
-    log_data = StudentHelpLog.objects.get(classes=classid)
-
+    
+    log_data = StudentHelp.objects.filter(classid=classid)
     return render(request, 'StudentHelpLog.html', {'Logs': log_data})

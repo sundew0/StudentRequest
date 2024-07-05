@@ -28,9 +28,9 @@ class Log(models.Model):
 
 
 class StudentHelp(models.Model):
-    user = models.ManyToManyField(User)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     date = models.DateTimeField("date posted", auto_now_add=True)
-    classid = models.ManyToManyField(Classes)
+    classid = models.ForeignKey(Classes, on_delete=models.CASCADE)
     reason = models.CharField(max_length=9, choices=Reason_lsit)
 
 class StudentHelpLog(models.Model):

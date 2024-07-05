@@ -19,9 +19,9 @@
 
             {% for log in Logs %}
             <tr>
-                <td>{{ log.datelogged }}</td>
+                <td>{{ log.date }}</td>
                 <td>{{ log.user.user.username }}</td>
-                <td>{{ log.classes.ClassName }}: {{ log.classes.ClassCode }}</td>
+                <td>{{ log.classid.ClassName }}: {{ log.classid.ClassCode }}</td>
                 <td>{{ log.reason }}</td>
             </tr>
             {% endfor %}

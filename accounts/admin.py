@@ -2,7 +2,7 @@ from django.contrib import admin#type: ignore
 from django.contrib.auth.models import User#type: ignore
 from django.contrib.auth.admin import UserAdmin#type: ignore
 # Register your models here.
-from .models import Classes, ClassList, Account
+from .models import Classes, ClassList, Account, Subjects
 
 class AccountInline(admin.StackedInline):
     model = Account
@@ -19,3 +19,5 @@ admin.site.register(User, CustomUserAdmin)
 admin.site.register(Account)
 admin.site.register(Classes)
 admin.site.register(ClassList)
+
+admin.site.register(Subjects)

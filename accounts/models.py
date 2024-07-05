@@ -10,11 +10,20 @@ class Account(models.Model):
     def __str__ (self):
         return f"username: {self.user},  Teacher: {self.IsTeacher}"
 
+class Subjects(models.Model):
+    SubjectName = models.CharField(max_length=50, null=False)
+    id = models.AutoField(primary_key=True)
+    HeadTeacher = models.ForeignKey(Account, null=True, on_delete=models.PROTECT)
+    def __str__ (self):
+        return f"{self.SubjectName}"
+
+
+
 
 
 class Classes(models.Model):
     ClassName = models.CharField(max_length=100, null=True)
-    Subject = models.CharField(max_length=50, null=True)
+    Subject = models.ForeignKey(Subjects, on_delete=models.PROTECT)
     id = models.AutoField(primary_key=True)
     ClassCode = models.CharField(max_length=6, null=True, verbose_name="Class Code")
     ClassJoinCode = models.CharField(max_length=6, null=True, unique=True, verbose_name="join Code")

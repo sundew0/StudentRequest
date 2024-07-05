@@ -4,8 +4,8 @@ from django.http import HttpResponse#type: ignore
 from django.contrib.auth.decorators import login_required, user_passes_test#type: ignore
 from django.shortcuts import render, redirect#type: ignore
 from StudentSupport.utils import is_on_group_check, getClassFromID, is_user_in_class#type: ignore
-from .forms import CreateNewClass
-from .models import Classes, Account
+from .forms import CreateNewClass, CreateNewSubject
+from .models import Classes, Account,Subjects
 from .backendFunctions import id_generator
 
 def getClassinfo(request, id):
@@ -63,3 +63,29 @@ def Create_New_Class(request):
         'form': form   
     }
     return render(request, 'CreateClass.html',context=context)
+
+
+def Create_New_Subject(request):
+    if request.method == 'POST':
+        form = CreateNewSubject(request.POST)
+        if form.is_valid():
+            SubjectName = form.cleaned_data['SubjectName']
+            print(SubjectName)
+            UserId = form.cleaned_data['UserId']
+            user_instance = Account.objects.get(user=UserId)    
+            print(UserId)
+        
+
+            if not Subjects.objects.filter(SubjectName=SubjectName, HeadTeacher=user_instance).exists():
+                newSubject = Subjects(SubjectName=SubjectName, HeadTeacher=user_instance)
+                newSubject.save()
+                
+                return redirect('home')
+
+    else:
+        form = CreateNewSubject()
+
+    context = {
+        'form': form   
+    }
+    return render(request, 'CreateSubject.html',context=context)

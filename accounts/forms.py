@@ -2,6 +2,8 @@ from django import forms#type: ignore
 from django.contrib.auth.forms import UserCreationForm#type: ignore
 from django.contrib.auth import get_user_model#type: ignore
 
+from .models import Subjects, User
+
 class CustomUserCreationForm(UserCreationForm):
     IsTeacher = forms.BooleanField()
 
@@ -18,8 +20,14 @@ class JoinClassForm(forms.Form):
 class CreateNewClass(forms.Form):
     
     Classname = forms.CharField(label='Class Name', max_length=100)
-    Subject = forms.CharField(label='Class Subject', max_length=50)
+    Subject = forms.ModelChoiceField(queryset=Subjects.objects)
     ClassCode = forms.CharField(label='Class Code', max_length=6)
+
+class CreateNewSubject(forms.Form):
+    
+    SubjectName = forms.CharField(label='Subject Name', max_length=50)
+    UserId = forms.ModelChoiceField(queryset=User.objects.all())
+
 
 
 #    ClassName = models.CharField(max_length=100, null=True)

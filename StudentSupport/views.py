@@ -37,17 +37,16 @@ def addToLog(request):
         return redirect(request.META.get('HTTP_REFERER', 'default-view-name'))
 
     try:
-        AlreadyLogged = StudentHelp.objects.get(user=user, classid=class_instance, reason=reason)
+        AlreadyLogged = StudentHelp.objects.get(user=user_instance, classid=class_instance, reason=reason)
     except StudentHelp.DoesNotExist:
         AlreadyLogged = None
 
     if not AlreadyLogged:
         ininclass = ClassList.objects.filter(UserID=user_instance, ClassID=class_instance).exists()
         if ininclass:
-            newLog = StudentHelp(reason=reason)
+            newLog = StudentHelp(classid= class_instance,reason=reason, user=user_instance)
             newLog.save()
-            newLog.user.add(user)
-            newLog.classid.add(class_instance)
+
             log_action(user_instance, 'CREATE_HELP_LOG_REQUEST', f'Successfully created a help request with reason: {reason}, in class id {class_instance.id}')
             messages.success(request, "Help request created successfully.")
         else:
