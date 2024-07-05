@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect#type: ignore
 from StudentSupport.utils import is_on_group_check, getClassFromID, is_user_in_class#type: ignore
 from .forms import CreateNewClass
 from .models import Classes, Account
+from .backendFunctions import id_generator
 
 def getClassinfo(request, id):
     user = request.user
@@ -43,14 +44,17 @@ def Create_New_Class(request):
             print(ClassName)
             ClassSubject = form.cleaned_data['Subject']
             print(ClassSubject)
+            ClassCode = form.cleaned_data['Class Code']
             
 
             if not Classes.objects.filter(ClassName=ClassName, Subject=ClassSubject).exists():
-                newClass = Classes(ClassName=ClassName, Subject=ClassSubject)
+                newClass = Classes(ClassName=ClassName, Subject=ClassSubject, ClassCode = ClassCode, ClassJoinCode=id_generator())
                 newClass.save()
                 newClass.Teachers.add(user_instance.user)
-            print(Classes.objects.filter(ClassName=ClassName, Subject=ClassSubject))
                 
+ 
+ 
+ 
             return redirect('home')
     else:
         form = CreateNewClass()
