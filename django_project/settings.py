@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['http://*',
-                        'https://localhost:8000']
+                        'https://localhost:8000',
+                        'https://stormy-karrah-primeemc-cac6dcc7.koyeb.app']
 # Application definition
 
 INSTALLED_APPS = [
