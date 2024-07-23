@@ -1,11 +1,9 @@
-
-
 from django.http import HttpResponse#type: ignore
 from django.contrib.auth.decorators import login_required, user_passes_test#type: ignore
 from django.shortcuts import render, redirect#type: ignore
 from StudentSupport.utils import is_on_group_check, getClassFromID, is_user_in_class#type: ignore
 from .forms import CreateNewClass, CreateNewSubject
-from .models import Classes, Account,Subjects
+from .models import Classes, Account,Subjects, ClassList
 from .backendFunctions import id_generator
 
 def getClassinfo(request, id):
@@ -17,7 +15,6 @@ def getClassinfo(request, id):
         return HttpResponse('teacher: ' + str(id))
     else:
         return HttpResponse('test: ' + str(id))
-
 
 def getClass(request, id):
     if (is_user_in_class(id)):
@@ -51,7 +48,10 @@ def Create_New_Class(request):
                 newClass = Classes(ClassName=ClassName, Subject=ClassSubject, ClassCode = ClassCode, ClassJoinCode=id_generator())
                 newClass.save()
                 newClass.Teachers.add(user_instance.user)
-                
+
+                addToClass = ClassList(UserID = user_instance, ClassID=newClass, Teacher=True)
+                addToClass.save()
+
  
  
  
@@ -69,9 +69,9 @@ def Create_New_Subject(request):
     if request.method == 'POST':
         form = CreateNewSubject(request.POST)
         if form.is_valid():
-            SubjectName = form.cleaned_data['SubjectName']
+            SubjectName = form.cleaned_data['Subject_Name']
             print(SubjectName)
-            UserId = form.cleaned_data['UserId']
+            UserId = form.cleaned_data['Head_Teacher']
             user_instance = Account.objects.get(user=UserId)    
             print(UserId)
         

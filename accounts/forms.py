@@ -25,8 +25,8 @@ class CreateNewClass(forms.Form):
 
 class CreateNewSubject(forms.Form):
     
-    SubjectName = forms.CharField(label='Subject Name', max_length=50)
-    UserId = forms.ModelChoiceField(queryset=User.objects.all())
+    Subject_Name = forms.CharField(label='Subject Name', max_length=50)
+    Head_Teacher = forms.ModelChoiceField(queryset=User.objects.filter(groups__name='teacher'))
 
 
 
